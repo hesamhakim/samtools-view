@@ -2,12 +2,10 @@ version 1.0
 task viewRegion {
     input {
         File bam_or_cram_input
-        File bam_or_cram_index=bam_or_cram_input+".crai"
+        File bam_or_cram_index
+	File bed
+	String region
         String outputRoot
-        String region
-        File ref
-        File ref_fasta_index
-        File ref_dict
         Int mem_gb
         Int addtional_disk_size = 100 
         Int machine_mem_size = 15
@@ -16,12 +14,11 @@ task viewRegion {
     }
 
 	command {
-		bash -c "echo ~{bam_or_cram_input}; samtools; samtools view --reference ~{ref} ~{bam_or_cram_input} ~{region} -b -o ~{outputRoot}.extracted.bam"
+		bash -c "echo ~{bam_or_cram_input}; samtools; samtools view ~{bam_or_cram_input} -X ~{bam_or_cram_index} ~{region} -b -o ~{outputRoot}/~{bam_or_cram_input}.extracted.bam"
 	}
 
 	output {
-		File extractedBam = "~{outputRoot}.extracted.bam"
-
+		File extractedBam = "~{outputRoot}/~{bam_or_cram_index}.extracted.bam"
 
 	}
 
@@ -32,28 +29,26 @@ task viewRegion {
 	}
 
 	meta {
-		author: "jlanej"
+		author: "jlanej_hesam"
 	}
 }
 
 workflow extractRegionWorkflow {
     input {
         File bam_or_cram_input
+	File bam_or_cram_index
         String outputRoot
         String region
-        File ref
-        File ref_fasta_index
-        File ref_dict
+	File bed
         Int mem_gb
     }
 	call viewRegion { 
 		input:
 	 bam_or_cram_input=bam_or_cram_input,
+	 bam_or_cram_index=bam_or_cram_index,
 	 region=region,
 	 outputRoot=outputRoot,
-	 ref=ref,
-	 ref_fasta_index=ref_fasta_index,
-	 ref_dict=ref_dict,
+	 bad=bad
 	 mem_gb=mem_gb 
 	}
 }
