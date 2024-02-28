@@ -1,17 +1,16 @@
 version 1.0
 task viewRegion {
     input {
-        File bam_or_cram_input
-        File bam_or_cram_index
-	File bed
-	String region
-        String outputRoot
-        Int mem_gb
-        Int addtional_disk_size = 200 
-        Int machine_mem_size = 15
-   		Int disk_size = ceil(size(bam_or_cram_input, "GB")) + addtional_disk_size
-
-    }
+		File bam_or_cram_input
+		File bam_or_cram_index
+		File bed
+		String region
+		String outputRoot
+		Int mem_gb
+		Int addtional_disk_size = 200 
+		Int machine_mem_size = 15
+		Int disk_size = ceil(size(bam_or_cram_input, "GB")) + addtional_disk_size
+		}
 
 	command {
 		bash -c "echo ~{bam_or_cram_input}; samtools; samtools view ~{bam_or_cram_input} -X ~{bam_or_cram_index} ~{region} -b -o ~{outputRoot}/~{bam_or_cram_input}.extracted.bam"
@@ -34,14 +33,14 @@ task viewRegion {
 }
 
 workflow extractRegionWorkflow {
-    input {
-        File bam_or_cram_input
+	input {
+	File bam_or_cram_input
 	File bam_or_cram_index
-        String outputRoot
-        String region
+	String outputRoot
+	String region
 	File bed
-        Int mem_gb
-    }
+	Int mem_gb
+	}
 	call viewRegion { 
 		input:
 	 bam_or_cram_input=bam_or_cram_input,
@@ -53,4 +52,4 @@ workflow extractRegionWorkflow {
 	}
 }
 
-#		
+#
