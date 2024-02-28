@@ -7,7 +7,7 @@ task viewRegion {
 	String region
         String outputRoot
         Int mem_gb
-        Int addtional_disk_size = 100 
+        Int addtional_disk_size = 200 
         Int machine_mem_size = 15
    		Int disk_size = ceil(size(bam_or_cram_input, "GB")) + addtional_disk_size
 
