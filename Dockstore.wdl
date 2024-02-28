@@ -48,7 +48,7 @@ workflow extractRegionWorkflow {
 	 bam_or_cram_index=bam_or_cram_index,
 	 region=region,
 	 outputRoot=outputRoot,
-	 bad=bad
+	 bad=bad,
 	 mem_gb=mem_gb 
 	}
 }
