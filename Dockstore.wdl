@@ -22,7 +22,7 @@ task viewBamRegion {
 	}
 
 	runtime {
-		docker: "quay.io/jlanej/mosdepth-docker:sha256:6c31a803fad8ed5873cbd856b057039ced23768cf260d7317c57b0f7a9663e11"
+		docker: "quay.io/ldcabansay/samtools:latest"
 		memory: mem_gb + "GB"
 		disks: "local-disk " + disk_size + " HDD"
 	}
