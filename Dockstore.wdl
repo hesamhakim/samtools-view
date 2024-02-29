@@ -4,20 +4,18 @@ task viewBamRegion {
 		File bam_input
 		File bam_index
 		File bed
-		String region
-		String outputRoot
 		Int mem_gb
 		Int addtional_disk_size = 200 
 		Int machine_mem_size = 15
 		Int disk_size = ceil(size(bam_input, "GB")) + addtional_disk_size
 		}
 
-	command {
-		bash -c "echo ~{bam_input}; samtools; samtools view ~{bam_input} -X ~{bam_index} ~{region} -b -o ~{outputRoot}/~{bam_input}.extracted.bam"
-	}
+	command <<<
+		bash -c "echo ~{bam_input}; samtools; samtools view ~{bam_input} -X ~{bam_index} chrM -b -o ~{bam_input}.chrM.extracted.bam"
+	>>>
 
 	output {
-		File extractedBam = "~{outputRoot}/~{bam_input}.extracted.bam"
+		File extractedBam = "~{bam_input}.chrM.extracted.bam"
 
 	}
 
@@ -37,7 +35,6 @@ workflow extractRegionWorkflow {
 	File bam_input
 	File bam_index
 	String outputRoot
-	String region
 	File bed
 	Int mem_gb
 	}
@@ -45,7 +42,6 @@ workflow extractRegionWorkflow {
 		input:
 	 bam_input=bam_input,
 	 bam_index=bam_index,
-	 region=region,
 	 outputRoot=outputRoot,
 	 bed=bed,
 	 mem_gb=mem_gb 
