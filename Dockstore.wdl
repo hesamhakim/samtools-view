@@ -43,8 +43,8 @@ workflow extractRegionWorkflow {
 	}
 	call viewBamRegion { 
 		input:
-	 bam_input=bam_or_cram_input,
-	 bam_index=bam_or_cram_index,
+	 bam_input=bam_input,
+	 bam_index=bam_index,
 	 region=region,
 	 outputRoot=outputRoot,
 	 bed=bed,
