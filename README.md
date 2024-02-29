@@ -1,4 +1,5 @@
 # samtools-view
-sam tools view workflow
+samtools view workflow based on jlanej wdl
 
-https://dockstore.org/workflows/github.com/jlanej/samtools-view:main?tab=info 
+https://dockstore.org/my-workflows/github.com/hesamhakim/samtools-view
+
