@@ -34,7 +34,6 @@ workflow extractRegionWorkflow {
 	input {
 	File bam_input
 	File bam_index
-	String outputRoot
 	File bed
 	Int mem_gb
 	}
@@ -42,7 +41,6 @@ workflow extractRegionWorkflow {
 		input:
 	 bam_input=bam_input,
 	 bam_index=bam_index,
-	 outputRoot=outputRoot,
 	 bed=bed,
 	 mem_gb=mem_gb 
 	}
