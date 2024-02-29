@@ -10,9 +10,9 @@ task viewBamRegion {
 		Int disk_size = ceil(size(bam_input, "GB")) + addtional_disk_size
 		}
 
-	command <<<
+	command {
 		bash -c "echo ~{bam_input}; samtools; samtools view ~{bam_input} -X ~{bam_index} chrM -b -o ~{bam_input}.chrM.extracted.bam"
-	>>>
+	}
 
 	output {
 		File extractedBam = "~{bam_input}.chrM.extracted.bam"
